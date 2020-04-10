@@ -8,26 +8,20 @@ const SearchScreen = () => {
   const [term, setTerm] = useState('');
   const [searchApi, results, errorMessage] = useResults();
 
-  console.log(results.phone);
-
   const filterResultsByPrice = (price) => {
-    return results.filter( result => {
+    return results.filter((result) => {
       return result.price === price;
     });
   };
 
   return (
     <>
-      <SearchBar
-        onTermSubmit={searchApi}
-        term={term}
-        onTermChange={(newTerm) => setTerm}
-      />
+      <SearchBar onTermSubmit={searchApi} term={term} onTermChange={(newTerm) => setTerm} />
       {errorMessage ? <Text>{errorMessage}</Text> : null}
       <ScrollView>
-      <ResultsList results={filterResultsByPrice('$')} title='Cost Effective' />
-      <ResultsList results={filterResultsByPrice('$$')} title='Bit Pricier' />
-      <ResultsList results={filterResultsByPrice('$$$' || '$$$$')} title='Big Spender' />
+        <ResultsList results={filterResultsByPrice('$')} title='Cost Effective' />
+        <ResultsList results={filterResultsByPrice('$$')} title='Bit Pricier' />
+        <ResultsList results={filterResultsByPrice('$$$' || '$$$$')} title='Big Spender' />
       </ScrollView>
     </>
   );
